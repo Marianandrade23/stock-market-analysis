@@ -5,7 +5,8 @@
 
 This research applies **data analytics techniques** to examine stock market behavior across major US industries using the **US Stock Market Historical OHLCV Dataset** (120 companies, 9 sectors, 184K+ records).
 
-**Research Conductor:** Dr. Sandstrom
+**Research Conductor:** Mariana Andrade  
+**Research Advisor:** Dr. Sandstrom
 
 ---
 
@@ -13,30 +14,35 @@ This research applies **data analytics techniques** to examine stock market beha
 
 ### Primary Analysis Areas:
 
-1. **Price Trends**
-   - How Open, High, Low, Close (OHLC) prices move over time
-   - Trend identification and pattern recognition
-   - Sector-specific price movements
-
-2. **Volume Patterns**
-   - Trading volume analysis and what it reveals about market activity
-   - Volume-price relationships
+1. **Volume Patterns & Market Activity**
+   - Trading volume analysis and market participation levels
+   - Volume-price relationships and correlations
    - Liquidity indicators by sector
+   - Volume spikes and anomalies
 
-3. **Sector Comparison**
-   - Volatility analysis across major US industries (Tech, Healthcare, Energy, Finance, etc.)
+2. **Volatility Analysis**
+   - Volatility clustering and persistence
+   - GARCH models to capture time-varying volatility
+   - Volatility regimes (low, normal, high volatility periods)
+   - Volatility forecasting
+
+3. **Sector-Specific Volatility Impact**
+   - How volume and volatility differ across 9 sectors
+   - Sector risk profiles and volatility rankings
    - Identification of stable vs. volatile sectors
-   - Sector performance benchmarking
+   - Cross-sector volatility comparisons
 
-4. **Descriptive & Exploratory Data Analysis (EDA)**
-   - Statistical summaries of market data
-   - Outlier detection and analysis
-   - Market close patterns and anomalies
+4. **Volume-Volatility Relationship**
+   - Does trading volume predict volatility?
+   - How do volume spikes affect market risk?
+   - Correlation between volume patterns and volatility clustering
+   - Sector differences in volume-volatility dynamics
 
 5. **Visualization & Communication**
    - Interactive charts and dashboards
-   - Clear visual communication of findings
-   - Insights for investors, analysts, and decision-makers
+   - Volume and volatility metrics by sector
+   - Time series decomposition visualizations
+   - Risk profile dashboards for decision-makers
 
 ---
 
@@ -54,22 +60,30 @@ This research applies **data analytics techniques** to examine stock market beha
 
 ## Theoretical Framework
 
-### Time Series Analysis
-- **Stationarity Testing:** ADF (Augmented Dickey-Fuller) tests
-- **Autocorrelation Analysis:** ACF/PACF plots
-- **Autoregressive Models:** AR, ARIMA, ARIMAX
-- **Time Series Decomposition:** Trend, Seasonality, Residuals
+### Volume Analysis
+- **On-Balance Volume (OBV):** Cumulative volume indicator
+- **Volume Rate of Change (VROC):** Volume momentum
+- **Price-Volume Trend:** Combined price and volume indicator
+- **Volume Weighted Average Price (VWAP):** Price adjusted by volume
+
+### Volatility Modeling
+- **GARCH Models:** Time-varying conditional volatility
+- **Volatility Regimes:** Low, Normal, High volatility states
+- **Volatility Clustering:** Periods of high volatility tend to persist
+- **Rolling Volatility:** Time-window based volatility estimation
+- **Annualized Volatility:** Sector and cross-sector comparisons
+
+### Volume-Volatility Relationship
+- **Empirical Evidence:** Volume often predicts volatility
+- **Microstructure Theory:** Trading activity affects price discovery
+- **Information Flow:** Volume as proxy for information arrival
+- **Liquidity Risk:** How volume affects market depth
 
 ### Financial Risk Metrics
-- **Volatility Clustering:** GARCH models, volatility regimes
-- **Value at Risk (VaR):** Parametric and non-parametric approaches
+- **Value at Risk (VaR):** Maximum potential loss under normal conditions
 - **Stock Returns Analysis:** Log returns, cumulative returns, risk-adjusted returns
-
-### Statistical Literature
-- Time series fundamentals and autocorrelation theory
-- Asset pricing models
-- Return distributions and tail behavior
-- Market microstructure
+- **Sharpe Ratio:** Risk-adjusted return by sector
+- **Drawdown Analysis:** Maximum loss from peak
 
 ---
 
@@ -85,28 +99,32 @@ stock-market-analysis/
 │   └── README_DATA.md                # Data dictionary and loading instructions
 ├── notebooks/
 │   ├── 01_Data_Loading_EDA.ipynb     # Initial data exploration
-│   ├── 02_Price_Trend_Analysis.ipynb # OHLC analysis and trends
-│   ├── 03_Volume_Pattern_Analysis.ipynb # Trading volume insights
-│   ├── 04_Sector_Comparison.ipynb    # Sector-level analysis
-│   ├── 05_Volatility_Analysis.ipynb  # Volatility clustering, GARCH
-│   ├── 06_Time_Series_Analysis.ipynb # Stationarity, ACF/PACF, ARIMA
-│   ├── 07_VaR_and_Risk_Metrics.ipynb # Value at Risk calculations
-│   └── 08_Outlier_Detection.ipynb    # Market anomalies and outliers
+│   ├── 02_Volume_Pattern_Analysis.ipynb # Trading volume insights and OBV
+│   ├── 03_Volatility_Analysis.ipynb  # Volatility clustering, GARCH models
+│   ├── 04_Sector_Comparison.ipynb    # Volume & volatility by sector
+│   ├── 05_Volume_Volatility_Relationship.ipynb # Correlation & causality
+│   ├── 06_Risk_Metrics_by_Sector.ipynb # VaR, Sharpe, drawdowns
+│   ├── 07_Time_Series_Models.ipynb   # GARCH, forecasting
+│   └── 08_Interactive_Dashboard.ipynb # Comprehensive sector dashboard
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py                # Yahoo Finance API integration
 │   ├── preprocessing.py              # Data cleaning and transformation
-│   ├── analysis.py                   # Statistical analysis functions
+│   ├── volume_analysis.py            # OBV, VROC, VWAP calculations
+│   ├── volatility_analysis.py        # GARCH, rolling volatility
+│   ├── sector_analysis.py            # Sector grouping and comparison
 │   ├── visualization.py              # Plotting and dashboards
-│   └── time_series_models.py         # ARIMA, GARCH implementations
+│   └── risk_metrics.py               # VaR, Sharpe ratio calculations
 ├── results/
 │   ├── figures/                      # Generated charts and plots
 │   ├── reports/                      # Analysis reports
-│   └── dashboards/                   # Interactive dashboards (Power BI, Plotly)
+│   └── dashboards/                   # Interactive dashboards (Plotly)
 ├── literature/
 │   ├── references.md                 # Key papers and textbooks
-│   ├── chapter_notes.md              # Notes from time series literature
-│   └── models_summary.md             # Model descriptions and formulas
+│   ├── volume_theory.md              # Volume analysis concepts
+│   ├── volatility_models.md          # GARCH and volatility theory
+│   └── sector_profiles.md            # Sector-specific insights
+├── ROADMAP.md                        # Project timeline and milestones
 └── .gitignore
 ```
 
@@ -118,7 +136,7 @@ stock-market-analysis/
 
 - Python 3.8+
 - Jupyter Notebook
-- Libraries: pandas, numpy, scikit-learn, statsmodels, matplotlib, seaborn, yfinance
+- Libraries: pandas, numpy, scikit-learn, statsmodels, matplotlib, seaborn, yfinance, arch (GARCH)
 
 ### Installation
 
@@ -138,41 +156,62 @@ jupyter notebook
 
 1. **Download Dataset:** Obtain the OHLCV dataset from Kaggle and place in `data/raw/`
 2. **Run Notebooks:** Start with `01_Data_Loading_EDA.ipynb`
-3. **Explore Sectors:** Use `04_Sector_Comparison.ipynb` for sector-level insights
-4. **Advanced Analysis:** Progress to time series and risk analysis notebooks
+3. **Analyze Volume:** Use `02_Volume_Pattern_Analysis.ipynb`
+4. **Study Volatility:** Use `03_Volatility_Analysis.ipynb`
+5. **Compare Sectors:** Use `04_Sector_Comparison.ipynb`
+6. **Explore Relationships:** Use `05_Volume_Volatility_Relationship.ipynb`
 
 ---
 
 ## Key Research Questions
 
-- How do price trends and volatility vary across sectors?
-- What patterns emerge when the market closes or during anomalies?
-- Are stock returns stationary? How do autocorrelation patterns differ by sector?
-- Which sectors have the highest Value at Risk?
-- Can ARIMA/GARCH models effectively capture volatility clustering?
-- What are the outliers and what market conditions produce them?
+**Volume Patterns:**
+- How does trading volume vary across sectors and time?
+- What patterns emerge during market anomalies?
+- How does volume relate to price movements?
+
+**Volatility Dynamics:**
+- Which sectors exhibit the highest volatility?
+- Is volatility persistent (clustering)?
+- Can GARCH models capture sector-specific volatility patterns?
+
+**Cross-Sector Impact:**
+- How do volume and volatility differ across the 9 sectors?
+- Are tech stocks more volatile than energy stocks?
+- Do different sectors respond differently to market events?
+
+**Volume-Volatility Relationship:**
+- Does high trading volume predict increased volatility?
+- Is this relationship consistent across all sectors?
+- Can we use volume to forecast volatility?
+
+**Risk Implications:**
+- Which sectors carry the highest risk (VaR)?
+- How do volume patterns affect risk metrics?
+- What are the risk-adjusted returns by sector?
 
 ---
 
 ## Tools & Technologies
 
 - **Python:** pandas, numpy, scipy, statsmodels, scikit-learn
+- **Volatility Modeling:** arch package (GARCH)
 - **Visualization:** matplotlib, seaborn, plotly
 - **Data Sources:** Yahoo Finance API (yfinance), Kaggle dataset
-- **Statistical Analysis:** Time series decomposition, ARIMA, GARCH, VaR
-- **Dashboards:** Power BI, Plotly, Jupyter interactive widgets
+- **Statistical Analysis:** Volume indicators, GARCH models, correlation analysis
+- **Dashboards:** Plotly, Jupyter interactive widgets
 
 ---
 
 ## Expected Outputs
 
-1. **EDA Report:** Summary statistics, distributions, and initial insights
-2. **Trend Analysis:** Price trends by sector with visualizations
-3. **Volatility Study:** GARCH models, volatility clustering identification
-4. **Time Series Models:** ARIMA fits with diagnostic plots
-5. **Risk Analysis:** VaR estimates, risk-adjusted returns by sector
-6. **Interactive Dashboard:** Comprehensive visualization of key metrics
-7. **Research Paper:** Findings, methodology, and conclusions
+1. **Volume Analysis Report:** Trading patterns and OBV metrics by sector
+2. **Volatility Study:** GARCH models, volatility clustering, regimes by sector
+3. **Sector Comparison:** Volume and volatility rankings and profiles
+4. **Volume-Volatility Report:** Correlation analysis, predictive relationships
+5. **Risk Metrics:** VaR, Sharpe ratios, drawdowns by sector
+6. **Interactive Dashboard:** Comprehensive visualization of volume, volatility, and risk
+7. **Research Findings:** Key conclusions on how volume and volatility affect different sectors
 
 ---
 
@@ -181,9 +220,11 @@ jupyter notebook
 - [ ] Download and load Kaggle dataset
 - [ ] Set up Yahoo Finance API integration
 - [ ] Perform initial EDA and data quality checks
-- [ ] Develop sector comparison framework
-- [ ] Implement time series models
-- [ ] Create visualizations and dashboards
+- [ ] Calculate volume indicators (OBV, VROC, VWAP)
+- [ ] Develop GARCH volatility models
+- [ ] Compare volume and volatility across sectors
+- [ ] Analyze volume-volatility relationships
+- [ ] Create interactive dashboards
 - [ ] Document findings and conclusions
 
 ---
@@ -191,12 +232,12 @@ jupyter notebook
 ## References & Literature
 
 **Key Topics:**
-- Time Series Forecasting and Autocorrelation (Chapters 20-21)
-- Autoregressive Models (AR, ARIMA, ARIMAX)
-- Volatility Clustering and GARCH Models
-- Value at Risk (VaR) and Risk Metrics
-- Stationarity Testing (ADF Test)
-- Asset Pricing Models and Stock Returns
+- Volume analysis and trading patterns
+- GARCH models and volatility clustering
+- Volume-volatility relationships in financial markets
+- Sector-specific market microstructure
+- Risk metrics and Value at Risk
+- Asset pricing and sector performance
 
 See `literature/references.md` for detailed citations and reading materials.
 
@@ -204,7 +245,7 @@ See `literature/references.md` for detailed citations and reading materials.
 
 ## Author
 
-**Marianandrade23**  
+**Mariana Andrade**  
 Research conducted under guidance of **Dr. Sandstrom**
 
 ---
